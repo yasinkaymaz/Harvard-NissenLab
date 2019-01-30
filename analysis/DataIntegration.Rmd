@@ -1,0 +1,28 @@
+---
+title: "Data Analysis"
+author: "Yasin Kaymaz"
+date: "1/25/2019"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(plotly)
+library(DT)
+options(width = 80)
+source("https://raw.githubusercontent.com/yasinkaymaz/cellRtools/master/main/functions.R")
+```
+
+
+# Tasic 2018 dataset
+## Optain the ALM dataset from Allen Inst.
+
+```{bash}
+#wget http://celltypes.brain-map.org/api/v2/well_known_file_download/694413179
+#unzip mouse_ALM_gene_expression_matrices_2018-06-14.zip
+```
+
+After downloading the data, unzip the file and use the exon based gene **count** matrix for further analysis.
+
+For the processing details, please follow [code/WP_codes.R](https://github.com/yasinkaymaz/Harvard-NissenLab/tree/master/code/WP_codes.R)
+

@@ -1,0 +1,57 @@
+---
+title: "DE_L5_IT-PT"
+author: "Yasin Kaymaz"
+date: "1/30/2019"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(plotly)
+library(DT)
+options(width = 80)
+source("https://raw.githubusercontent.com/yasinkaymaz/cellRtools/master/main/functions.R")
+```
+
+## Differentially expressed genes between PT and IT
+
+```{r echo=FALSE}
+
+load("data/Tasic2018-reAnalysis.RData")
+```
+
+Comparing all IT cells to PT cells within the L5 layer using Wilcoxon Rank sum test.
+
+```{r echo=FALSE, message=FALSE, warning=FALSE}
+p <- ggplot(allmarkers.subclass, aes(avg_logFC, y=-1*log10(p_val_adj+10^-200), color=cluster ))+
+  geom_point(aes(text=sprintf("Gene: %s", gene)))+
+  ylab("-log10(padj)")+
+  xlab("log Fold Change")
+ggplotly(p)
+
+
+```
+
+### Table for genes with significantly higher expression in IT:
+
+```{r, echo=FALSE, message=FALSE, warning=FALSE}
+allmarkers.subclass  %>% select(-p_val)%>% filter(cluster == "L5 IT") %>% filter(p_val_adj < 0.01) %>%
+  datatable( extensions = 'Scroller', options = list(
+    deferRender = TRUE,
+    scrollY = 200,
+    scroller = TRUE
+  ))
+```
+
+
+### Table for genes with significantly higher expression in PT:
+
+```{r, echo=FALSE, message=FALSE, warning=FALSE}
+allmarkers.subclass  %>% select(-p_val)%>% filter(cluster == "L5 PT") %>% filter(p_val_adj < 0.01) %>%
+  datatable( extensions = 'Scroller', options = list(
+    deferRender = TRUE,
+    scrollY = 200,
+    scroller = TRUE
+  ))
+```
+
