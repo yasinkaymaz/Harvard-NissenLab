@@ -57,7 +57,7 @@ I extracted the cells of interest which are categorized into 8 L5 IT subgroups a
     "L5 PT ALM Slco2a1"
 
 
-## Colored by IT/PY
+## Colored by IT/PT
 
 ```{r echo=FALSE}
 TSNEPlot(L5ALM.ITPT, group.by="subclass")
