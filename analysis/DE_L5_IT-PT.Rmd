@@ -32,7 +32,7 @@ ggplotly(p)
 
 ```
 
-### Table for genes with significantly higher expression in IT:
+### Table for genes with significantly higher expression in **IT**:
 
 ```{r, echo=FALSE, message=FALSE, warning=FALSE}
 allmarkers.subclass  %>% select(-p_val)%>% filter(cluster == "L5 IT") %>% filter(p_val_adj < 0.01) %>%
@@ -44,7 +44,7 @@ allmarkers.subclass  %>% select(-p_val)%>% filter(cluster == "L5 IT") %>% filter
 ```
 
 
-### Table for genes with significantly higher expression in PT:
+### Table for genes with significantly higher expression in **PT**:
 
 ```{r, echo=FALSE, message=FALSE, warning=FALSE}
 allmarkers.subclass  %>% select(-p_val)%>% filter(cluster == "L5 PT") %>% filter(p_val_adj < 0.01) %>%
