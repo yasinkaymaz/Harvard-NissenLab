@@ -9,9 +9,10 @@
 <meta name="generator" content="pandoc" />
 
 
+<meta name="author" content="Yasin Kaymaz" />
 
 
-<title>Home</title>
+<title>DimensionReduction_Clustering</title>
 
 <script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -19,6 +20,9 @@
 <script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
 <script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
 <script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<script src="site_libs/jqueryui-1.11.4/jquery-ui.min.js"></script>
+<link href="site_libs/tocify-1.9.1/jquery.tocify.css" rel="stylesheet" />
+<script src="site_libs/tocify-1.9.1/jquery.tocify.js"></script>
 <script src="site_libs/navigation-1.1/tabsets.js"></script>
 <link href="site_libs/highlightjs-9.12.0/textmate.css" rel="stylesheet" />
 <script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
@@ -169,6 +173,101 @@ $(document).ready(function () {
 
 
 
+<script>
+$(document).ready(function ()  {
+
+    // move toc-ignore selectors from section div to header
+    $('div.section.toc-ignore')
+        .removeClass('toc-ignore')
+        .children('h1,h2,h3,h4,h5').addClass('toc-ignore');
+
+    // establish options
+    var options = {
+      selectors: "h1,h2,h3",
+      theme: "bootstrap3",
+      context: '.toc-content',
+      hashGenerator: function (text) {
+        return text.replace(/[.\\/?&!#<>]/g, '').replace(/\s/g, '_').toLowerCase();
+      },
+      ignoreSelector: ".toc-ignore",
+      scrollTo: 0
+    };
+    options.showAndHide = true;
+    options.smoothScroll = true;
+
+    // tocify
+    var toc = $("#TOC").tocify(options).data("toc-tocify");
+});
+</script>
+
+<style type="text/css">
+
+#TOC {
+  margin: 25px 0px 20px 0px;
+}
+@media (max-width: 768px) {
+#TOC {
+  position: relative;
+  width: 100%;
+}
+}
+
+
+.toc-content {
+  padding-left: 30px;
+  padding-right: 40px;
+}
+
+div.main-container {
+  max-width: 1200px;
+}
+
+div.tocify {
+  width: 20%;
+  max-width: 260px;
+  max-height: 85%;
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+  div.tocify {
+    width: 25%;
+  }
+}
+
+@media (max-width: 767px) {
+  div.tocify {
+    width: 100%;
+    max-width: none;
+  }
+}
+
+.tocify ul, .tocify li {
+  line-height: 20px;
+}
+
+.tocify-subheader .tocify-item {
+  font-size: 0.90em;
+  padding-left: 25px;
+  text-indent: 0;
+}
+
+.tocify .list-group-item {
+  border-radius: 0px;
+}
+
+
+</style>
+
+<!-- setup 3col/9col grid for toc_float and main content  -->
+<div class="row-fluid">
+<div class="col-xs-12 col-sm-4 col-md-3">
+<div id="TOC" class="tocify">
+</div>
+</div>
+
+<div class="toc-content col-xs-12 col-sm-8 col-md-9">
+
+
 
 
 <div class="navbar navbar-default  navbar-fixed-top" role="navigation">
@@ -219,7 +318,9 @@ div.section {
 
 
 
-<h1 class="title toc-ignore">Home</h1>
+<h1 class="title toc-ignore">DimensionReduction_Clustering</h1>
+<h4 class="author"><em>Yasin Kaymaz</em></h4>
+<h4 class="date"><em>1/30/2019</em></h4>
 
 </div>
 
@@ -230,6 +331,21 @@ div.section {
 <li>
 <p><details> <summary> <strong style="color:blue;">✔</strong> <strong>R Markdown file:</strong> up-to-date </summary></p>
 <p>Great! Since the R Markdown file has been committed to the Git repository, you know the exact version of the code that produced these results.</p>
+</details>
+</li>
+<li>
+<p><details> <summary> <strong style="color:blue;">✔</strong> <strong>Environment:</strong> empty </summary></p>
+<p>Great job! The global environment was empty. Objects defined in the global environment can affect the analysis in your R Markdown file in unknown ways. For reproduciblity it’s best to always run the code in an empty environment.</p>
+</details>
+</li>
+<li>
+<p><details> <summary> <strong style="color:blue;">✔</strong> <strong>Seed:</strong> <code>set.seed(20190124)</code> </summary></p>
+<p>The command <code>set.seed(20190124)</code> was run prior to running the code in the R Markdown file. Setting a seed ensures that any results that rely on randomness, e.g. subsampling or permutations, are reproducible.</p>
+</details>
+</li>
+<li>
+<p><details> <summary> <strong style="color:blue;">✔</strong> <strong>Session information:</strong> recorded </summary></p>
+<p>Great job! Recording the operating system, R version, and package versions is critical for reproducibility.</p>
 </details>
 </li>
 <li>
@@ -257,9 +373,6 @@ Ignored files:
     Ignored:    data/mouse_ALM_2018-06-14_exon-matrix.csv
     Ignored:    data/mouse_ALM_2018-06-14_genes-rows.csv
     Ignored:    data/mouse_ALM_2018-06-14_samples-columns.csv
-
-Untracked files:
-    Untracked:  docs/figure/DimensionReduction_Clustering.Rmd/
 
 Unstaged changes:
     Modified:   .Rproj.user/570CF2E1/console06/INDEX001
@@ -295,10 +408,10 @@ Message
 <tbody>
 <tr>
 <td style="text-align:left;">
-html
+Rmd
 </td>
 <td style="text-align:left;">
-<a href="https://cdn.rawgit.com/yasinkaymaz/Harvard-NissenLab/cb809839604c483cae5ef673df06ae0fc0fb35e7/docs/index.html" target="_blank">cb80983</a>
+<a href="https://github.com/yasinkaymaz/Harvard-NissenLab/blob/4685e127b75b1a49fe15fa4436cf4285c2f0d116/analysis/DimensionReduction_Clustering.Rmd" target="_blank">4685e12</a>
 </td>
 <td style="text-align:left;">
 Yasin Kaymaz
@@ -307,109 +420,7 @@ Yasin Kaymaz
 2019-01-30
 </td>
 <td style="text-align:left;">
-Build site.
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-html
-</td>
-<td style="text-align:left;">
-<a href="https://cdn.rawgit.com/yasinkaymaz/Harvard-NissenLab/305c40f6290f9c838c069c1248f86053501a9686/docs/index.html" target="_blank">305c40f</a>
-</td>
-<td style="text-align:left;">
-Yasin Kaymaz
-</td>
-<td style="text-align:left;">
-2019-01-28
-</td>
-<td style="text-align:left;">
-Build site.
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-html
-</td>
-<td style="text-align:left;">
-<a href="https://cdn.rawgit.com/yasinkaymaz/Harvard-NissenLab/0b23a24ca100ebc456e84a6e7f448f1ae9c081ab/docs/index.html" target="_blank">0b23a24</a>
-</td>
-<td style="text-align:left;">
-Yasin Kaymaz
-</td>
-<td style="text-align:left;">
-2019-01-28
-</td>
-<td style="text-align:left;">
-Build site.
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-html
-</td>
-<td style="text-align:left;">
-<a href="https://cdn.rawgit.com/yasinkaymaz/Harvard-NissenLab/0fc8dadd930664d194fe07ce4fccc2ebd5d74501/docs/index.html" target="_blank">0fc8dad</a>
-</td>
-<td style="text-align:left;">
-Yasin Kaymaz
-</td>
-<td style="text-align:left;">
-2019-01-28
-</td>
-<td style="text-align:left;">
-Build site.
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-html
-</td>
-<td style="text-align:left;">
-<a href="https://cdn.rawgit.com/yasinkaymaz/Harvard-NissenLab/e4a209f8cdbeac0da9f338b0e8b7295cc2d93964/docs/index.html" target="_blank">e4a209f</a>
-</td>
-<td style="text-align:left;">
-Yasin Kaymaz
-</td>
-<td style="text-align:left;">
-2019-01-28
-</td>
-<td style="text-align:left;">
-Build site.
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-html
-</td>
-<td style="text-align:left;">
-<a href="https://cdn.rawgit.com/yasinkaymaz/Harvard-NissenLab/ca0ba7bdaa0c4bd62bcc2d045e12661ba55b7a35/docs/index.html" target="_blank">ca0ba7b</a>
-</td>
-<td style="text-align:left;">
-Yasin Kaymaz
-</td>
-<td style="text-align:left;">
-2019-01-25
-</td>
-<td style="text-align:left;">
-Build site.
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-Rmd
-</td>
-<td style="text-align:left;">
-<a href="https://github.com/yasinkaymaz/Harvard-NissenLab/blob/620a47ed02c682f9522f09e8e44c12698c507ea8/analysis/index.Rmd" target="_blank">620a47e</a>
-</td>
-<td style="text-align:left;">
-Yasin Kaymaz
-</td>
-<td style="text-align:left;">
-2019-01-24
-</td>
-<td style="text-align:left;">
-Start workflowr project.
+reorganization
 </td>
 </tr>
 </tbody>
@@ -417,7 +428,103 @@ Start workflowr project.
 </ul>
 <p></details></p>
 <hr />
-<p>Welcome to my research website.</p>
+<div id="tsne-plots-of-all-alm-cells-in-the-study" class="section level2">
+<h2>TSNE plots of All ALM cells in the study</h2>
+<div id="colored-by-brain-subregions" class="section level3">
+<h3>Colored by brain subregions</h3>
+<p><img src="figure/DimensionReduction_Clustering.Rmd/unnamed-chunk-2-1.png" width="672" style="display: block; margin: auto;" /></p>
+</div>
+<div id="colored-by-brain-subclasses" class="section level3">
+<h3>Colored by brain subclasses</h3>
+<p><img src="figure/DimensionReduction_Clustering.Rmd/unnamed-chunk-3-1.png" width="672" style="display: block; margin: auto;" /></p>
+</div>
+<div id="colored-by-brain-cell-types" class="section level3">
+<h3>Colored by brain cell types</h3>
+<p><img src="figure/DimensionReduction_Clustering.Rmd/unnamed-chunk-4-1.png" width="672" style="display: block; margin: auto;" /></p>
+</div>
+</div>
+<div id="only-cell-clusters-of-interest" class="section level2">
+<h2>Only cell clusters of interest</h2>
+<pre><code>&quot;L5 IT ALM Cbln4 Fezf2&quot;,
+&quot;L5 IT ALM Cpa6 Gpr88&quot;,
+&quot;L5 IT ALM Gkn1 Pcdh19&quot;,
+&quot;L5 IT ALM Lypd1 Gpr88&quot;,
+&quot;L5 IT ALM Pld5&quot;,
+&quot;L5 IT ALM Tmem163 Arhgap25&quot;,
+&quot;L5 IT ALM Tmem163 Dmrtb1&quot;,
+&quot;L5 IT ALM Tnc&quot;,
+&quot;L5 PT ALM Hpgd&quot;,
+&quot;L5 PT ALM Npsr1&quot;,
+&quot;L5 PT ALM Slco2a1&quot;</code></pre>
+<p><img src="figure/DimensionReduction_Clustering.Rmd/unnamed-chunk-5-1.png" width="672" style="display: block; margin: auto;" /><img src="figure/DimensionReduction_Clustering.Rmd/unnamed-chunk-5-2.png" width="672" style="display: block; margin: auto;" /><img src="figure/DimensionReduction_Clustering.Rmd/unnamed-chunk-5-3.png" width="672" style="display: block; margin: auto;" /><img src="figure/DimensionReduction_Clustering.Rmd/unnamed-chunk-5-4.png" width="672" style="display: block; margin: auto;" /><img src="figure/DimensionReduction_Clustering.Rmd/unnamed-chunk-5-5.png" width="672" style="display: block; margin: auto;" /><img src="figure/DimensionReduction_Clustering.Rmd/unnamed-chunk-5-6.png" width="672" style="display: block; margin: auto;" /></p>
+</div>
+<div id="session-information" class="section level2">
+<h2>Session information</h2>
+<pre class="r"><code>sessionInfo()</code></pre>
+<pre><code>R version 3.5.0 (2018-04-23)
+Platform: x86_64-apple-darwin17.5.0 (64-bit)
+Running under: macOS  10.14.2
+
+Matrix products: default
+BLAS: /System/Library/Frameworks/Accelerate.framework/Versions/A/Frameworks/vecLib.framework/Versions/A/libBLAS.dylib
+LAPACK: /System/Library/Frameworks/Accelerate.framework/Versions/A/Frameworks/vecLib.framework/Versions/A/libLAPACK.dylib
+
+locale:
+[1] en_US.UTF-8/en_US.UTF-8/en_US.UTF-8/C/en_US.UTF-8/en_US.UTF-8
+
+attached base packages:
+[1] stats     graphics  grDevices utils     datasets  methods   base     
+
+other attached packages:
+ [1] bindrcpp_0.2.2  forcats_0.3.0   stringr_1.3.1   purrr_0.2.5    
+ [5] readr_1.1.1     tidyr_0.8.1     tibble_1.4.2    tidyverse_1.2.1
+ [9] dplyr_0.7.6     Seurat_2.3.3    Matrix_1.2-14   cowplot_0.9.3  
+[13] here_0.1        DT_0.4          plotly_4.8.0    ggplot2_3.0.0  
+
+loaded via a namespace (and not attached):
+  [1] diffusionMap_1.1-0   Rtsne_0.15           colorspace_1.3-2    
+  [4] class_7.3-14         modeltools_0.2-22    ggridges_0.5.0      
+  [7] mclust_5.4.1         rprojroot_1.3-2      htmlTable_1.12      
+ [10] base64enc_0.1-3      rstudioapi_0.8       proxy_0.4-22        
+ [13] flexmix_2.3-14       bit64_0.9-7          lubridate_1.7.4     
+ [16] mvtnorm_1.0-8        xml2_1.2.0           codetools_0.2-15    
+ [19] splines_3.5.0        R.methodsS3_1.7.1    robustbase_0.93-1   
+ [22] knitr_1.20           Formula_1.2-3        jsonlite_1.6        
+ [25] workflowr_1.1.1      broom_0.5.0          ica_1.0-2           
+ [28] cluster_2.0.7-1      kernlab_0.9-26       png_0.1-7           
+ [31] R.oo_1.22.0          compiler_3.5.0       httr_1.3.1          
+ [34] backports_1.1.2      assertthat_0.2.0     lazyeval_0.2.1      
+ [37] cli_1.0.0            lars_1.2             acepack_1.4.1       
+ [40] htmltools_0.3.6      tools_3.5.0          igraph_1.2.1        
+ [43] gtable_0.2.0         glue_1.2.0           reshape2_1.4.3      
+ [46] RANN_2.6             Rcpp_0.12.17         cellranger_1.1.0    
+ [49] trimcluster_0.1-2    gdata_2.18.0         ape_5.1             
+ [52] nlme_3.1-137         iterators_1.0.10     fpc_2.1-11          
+ [55] lmtest_0.9-36        rvest_0.3.2          irlba_2.3.2         
+ [58] gtools_3.8.1         DEoptimR_1.0-8       zoo_1.8-3           
+ [61] MASS_7.3-50          scales_1.0.0         hms_0.4.2           
+ [64] doSNOW_1.0.16        parallel_3.5.0       RColorBrewer_1.1-2  
+ [67] yaml_2.2.0           reticulate_1.9       pbapply_1.3-4       
+ [70] gridExtra_2.3        segmented_0.5-3.0    rpart_4.1-13        
+ [73] latticeExtra_0.6-28  stringi_1.2.3        foreach_1.4.4       
+ [76] checkmate_1.8.5      caTools_1.17.1       SDMTools_1.1-221    
+ [79] rlang_0.2.1          pkgconfig_2.0.1      dtw_1.20-1          
+ [82] prabclus_2.2-6       bitops_1.0-6         evaluate_0.10.1     
+ [85] lattice_0.20-35      ROCR_1.0-7           bindr_0.1.1         
+ [88] labeling_0.3         htmlwidgets_1.2      bit_1.1-14          
+ [91] tidyselect_0.2.4     plyr_1.8.4           magrittr_1.5        
+ [94] R6_2.3.0             snow_0.4-2           gplots_3.0.1        
+ [97] Hmisc_4.1-1          haven_1.1.2          pillar_1.3.0        
+[100] whisker_0.3-2        foreign_0.8-70       withr_2.1.2         
+[103] mixtools_1.1.0       fitdistrplus_1.0-9   survival_2.42-6     
+[106] scatterplot3d_0.3-41 nnet_7.3-12          tsne_0.1-3          
+[109] modelr_0.1.2         crayon_1.3.4         hdf5r_1.0.1         
+[112] KernSmooth_2.23-15   rmarkdown_1.10       readxl_1.1.0        
+[115] grid_3.5.0           data.table_1.11.4    git2r_0.23.0        
+[118] metap_0.9            digest_0.6.15        diptest_0.75-7      
+[121] R.utils_2.6.0        stats4_3.5.0         munsell_0.5.0       
+[124] viridisLite_0.3.0   </code></pre>
+</div>
 
 <!-- Adjust MathJax settings so that all math formulae are shown using
 TeX fonts only; see
@@ -440,6 +547,8 @@ footer is added to webpages before the MathJax javascript. -->
 <hr>
 
 
+</div>
+</div>
 
 </div>
 
