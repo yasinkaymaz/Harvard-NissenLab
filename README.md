@@ -1,5 +1,4 @@
 # Harvard-NissenLab
 
-A [workflowr][] project.
 
-[workflowr]: https://github.com/jdblischak/workflowr
+[Results web site]: https://yasinkaymaz.github.io/Harvard-NissenLab/index.html
