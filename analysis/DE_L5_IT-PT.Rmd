@@ -20,7 +20,7 @@ source("https://raw.githubusercontent.com/yasinkaymaz/cellRtools/master/main/fun
 load("data/Tasic2018-reAnalysis.RData")
 ```
 
-Comparing all IT cells to PT cells within the L5 layer using Wilcoxon Rank sum test.
+Comparing all IT cells to PT cells within the L5 layer using MAST test.
 
 ```{r echo=FALSE, message=FALSE, warning=FALSE}
 p <- ggplot(allmarkers.subclass, aes(avg_logFC, y=-1*log10(p_val_adj+10^-200), color=cluster ))+
@@ -55,3 +55,18 @@ allmarkers.subclass  %>% select(-p_val)%>% filter(cluster == "L5 PT") %>% filter
   ))
 ```
 
+
+
+
+
+.
+
+.
+
+.
+
+.
+
+.
+
+.

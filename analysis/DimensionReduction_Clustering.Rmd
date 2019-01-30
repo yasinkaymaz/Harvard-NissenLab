@@ -23,6 +23,8 @@ load("data/Tasic2018-reAnalysis.RData")
 
 ## TSNE plots of All ALM cells in the study 
 
+These plots show the level of expression diversity among all ALM cells with lower dimensions. Cells are colored based on various covariates such as brain region, cell class, cluster id, etc.
+
 ### Colored by brain subregions
 ```{r echo=FALSE}
 TSNEPlot(Tasic2018, group.by="brain_subregion")
@@ -40,6 +42,8 @@ TSNEPlot(Tasic2018, group.by="class")
 
 ## Only cell clusters of interest
 
+I extracted the cells of interest which are categorized into 8 L5 IT subgroups and 3 L5 PT subgroups resulting in ~2700 cells. Labels and marker genes attributed to each group (from publication) are as follows:
+
     "L5 IT ALM Cbln4 Fezf2",
     "L5 IT ALM Cpa6 Gpr88",
     "L5 IT ALM Gkn1 Pcdh19",
@@ -52,14 +56,36 @@ TSNEPlot(Tasic2018, group.by="class")
     "L5 PT ALM Npsr1",
     "L5 PT ALM Slco2a1"
 
+
+## Colored by IT/PY
+
 ```{r echo=FALSE}
-
-TSNEPlot(L5ALM.ITPT, group.by="brain_subregion")
 TSNEPlot(L5ALM.ITPT, group.by="subclass")
-TSNEPlot(L5ALM.ITPT, group.by="class")
-TSNEPlot(L5ALM.ITPT, group.by="cluster", do.label = T)
-TSNEPlot(L5ALM.ITPT, group.by="res.1", do.label = T)
-TSNEPlot(L5ALM.ITPT, group.by="sex")
-
 ```
 
+## Colored by subgroup labels
+
+```{r echo=FALSE, fig.height=10, fig.width=15}
+TSNEPlot(L5ALM.ITPT, group.by="cluster", do.label = T)
+```
+
+## Colored by gender of mice that cells belonged to
+
+```{r echo=FALSE}
+TSNEPlot(L5ALM.ITPT, group.by="sex")
+```
+
+
+
+
+.
+
+.
+
+.
+
+.
+
+.
+
+.
