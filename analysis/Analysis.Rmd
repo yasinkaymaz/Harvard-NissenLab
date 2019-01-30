@@ -1,5 +1,5 @@
 ---
-title: "Data-Processing"
+title: "Data Analysis"
 author: "Yasin Kaymaz"
 date: "1/25/2019"
 output: html_document
@@ -7,6 +7,12 @@ output: html_document
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
+library(plotly)
+library("knitr")
+library(kableExtra)
+library(magrittr)
+library(DT)
+options(width = 80)
 source("https://raw.githubusercontent.com/yasinkaymaz/cellRtools/master/main/functions.R")
 ```
 
@@ -21,7 +27,7 @@ source("https://raw.githubusercontent.com/yasinkaymaz/cellRtools/master/main/fun
 
 After downloading the data, unzip the file and use the exon based gene **count** matrix for further analysis.
 
-For the processing details, please follow code/WP_codes.R
+For the processing details, please follow [code/WP_codes.R](https://github.com/yasinkaymaz/Harvard-NissenLab/tree/master/code/WP_codes.R)
 
 ```{r echo=FALSE}
 
@@ -66,5 +72,42 @@ TSNEPlot(L5ALM.ITPT, group.by="subclass")
 TSNEPlot(L5ALM.ITPT, group.by="class")
 TSNEPlot(L5ALM.ITPT, group.by="cluster", do.label = T)
 TSNEPlot(L5ALM.ITPT, group.by="res.1", do.label = T)
+TSNEPlot(L5ALM.ITPT, group.by="sex")
 
+```
+
+## Differentially expressed genes between PT and IT
+
+Comparing all IT cells to PT cells within the L5 layer using Wilcoxon Rank sum test.
+
+```{r echo=FALSE, message=FALSE, warning=FALSE}
+p <- ggplot(allmarkers.subclass, aes(avg_logFC, -1*log10(p_val_adj), color=cluster ))+
+  geom_point(aes(text=sprintf("Gene: %s", gene)))+
+  ylab("-log10(padj)")+
+  xlab("log Fold Change")
+ggplotly(p)
+
+```
+
+### Table for genes with significantly higher expression in IT:
+
+```{r, echo=FALSE, message=FALSE, warning=FALSE}
+allmarkers.subclass  %>% select(-p_val)%>% filter(cluster == "L5 IT") %>% filter(p_val_adj < 0.01) %>%
+  datatable( extensions = 'Scroller', options = list(
+    deferRender = TRUE,
+    scrollY = 200,
+    scroller = TRUE
+  ))
+```
+
+
+### Table for genes with significantly higher expression in PT:
+
+```{r, echo=FALSE, message=FALSE, warning=FALSE}
+allmarkers.subclass  %>% select(-p_val)%>% filter(cluster == "L5 PT") %>% filter(p_val_adj < 0.01) %>%
+  datatable( extensions = 'Scroller', options = list(
+    deferRender = TRUE,
+    scrollY = 200,
+    scroller = TRUE
+  ))
 ```
