@@ -5,4 +5,12 @@ output:
     toc: false
 ---
 
-Describe your project.
+Work packages (WP):
+
+WP 1: Can Tasic 2016 and Tasic 2018 be combined to generate a single superset of interest for later work packages. D. Kaetzel will directly query Tasic to request feedback on experimental differences and whether Tasic 2016/2018 have been combined internally by The Allen Institute.     
+	
+WP 2: Based on meta data provided in Tasic 2018 subset the count matrix for cell clusters described above and determine the level of gene expression variance within IT and PT groups. The objective is to determine whether subclasses can be binned into two groups for further triaging against gene sets of interest or other cell classes.  
+
+WP 3: Undertake a contrast against pan-GABAergic cell types (as denoted by Gad1 from both Tasic 2016/2018. The objective of this WP is to identify an enriched gene expression profile for IT subsets and PT subsets.
+
+WP 4: Using gene lists provided by W. Nissen & K. Kaetzel (due by 11.01.19), specifically GPCRs identify receptors enriched in IT and PT sub-groups compared against all other cell types. Further triage gene list based on druggability profiling.
