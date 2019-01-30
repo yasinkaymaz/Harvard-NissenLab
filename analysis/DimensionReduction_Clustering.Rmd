@@ -57,19 +57,19 @@ I extracted the cells of interest which are categorized into 8 L5 IT subgroups a
     "L5 PT ALM Slco2a1"
 
 
-## Colored by IT/PT
+### Colored by IT/PT
 
 ```{r echo=FALSE}
 TSNEPlot(L5ALM.ITPT, group.by="subclass")
 ```
 
-## Colored by subgroup labels
+### Colored by subgroup labels
 
 ```{r echo=FALSE, fig.height=8, fig.width=10}
 TSNEPlot(L5ALM.ITPT, group.by="cluster", do.label = T)
 ```
 
-## Colored by gender of mice that cells belonged to
+### Colored by gender of mice that cells belonged to
 
 ```{r echo=FALSE}
 TSNEPlot(L5ALM.ITPT, group.by="sex")
