@@ -7,10 +7,11 @@ navbar:
       href: index.html
     - text: "About"
       href: about.html
-    - text: "License"
-      href: license.html
+    - text: "Analysis"
+      href: Analysis.html
   right:
     - icon: fa-github
+    - href: https://github.com/yasinkaymaz/Harvard-NissenLab
 output:
   workflowr::wflow_html:
     toc: true
