@@ -66,5 +66,8 @@ TSNEPlot(L5ALM.ITPT, group.by="brain_hemisphere")
 L5ALM.ITPT = SetAllIdent(L5ALM.ITPT, id = 'subclass')
 allmarkers.subclass <- FindAllMarkers(object = L5ALM.ITPT, test.use = "MAST", latent.vars = latentVars, logfc.threshold = 0.1,min.pct = 0.05,only.pos = T)
 
-save(Tasic2018, L5ALM.ITPT, allmarkers.subclass, file="~/data/Tasic2018-reAnalysis.RData")
+L5ALM.ITPT = SetAllIdent(L5ALM.ITPT, id = 'cluster')
+allmarkers.cluster <- FindAllMarkers(object = L5ALM.ITPT, test.use = "MAST", latent.vars = latentVars, logfc.threshold = 0.1,min.pct = 0.05,only.pos = T)
+
+save(Tasic2018, L5ALM.ITPT, allmarkers.subclass,allmarkers.cluster, file="~/data/Tasic2018-reAnalysis.RData")
 

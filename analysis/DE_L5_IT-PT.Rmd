@@ -67,7 +67,7 @@ DoHeatmap(object = L5ALM.ITPT, genes.use = top100$gene, slim.col.label = TRUE, r
 ## Same heatmap as above except cells are grouped into subcategories
 
 ```{r echo=FALSE, message=F, warning=F, fig.height=20, fig.width=20}
-top100 <- allmarkers.subclass %>% filter(p_val_adj < 0.01) %>% group_by(cluster) %>% top_n(100, avg_logFC)
+top100 <- allmarkers.cluster %>% filter(p_val_adj < 0.01) %>% group_by(cluster) %>% top_n(100, avg_logFC)
 L5ALM.ITPT = SetAllIdent(L5ALM.ITPT, id = 'cluster')
 DoHeatmap(object = L5ALM.ITPT, genes.use = top100$gene, slim.col.label = TRUE, remove.key = TRUE,group.label.loc="top",group.label.rot=T)
 ```
