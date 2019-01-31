@@ -13,6 +13,8 @@ navbar:
       href: DimensionReduction_Clustering.html
     - text: "DE Between IT & PT"
       href: DE_L5_IT-PT.html
+    - text: "IT-PT Contrasts"
+      href: IT-PT_Contrasts.html
   right:
     - icon: fa-github
     - href: https://github.com/yasinkaymaz/Harvard-NissenLab

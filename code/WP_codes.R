@@ -69,5 +69,32 @@ allmarkers.subclass <- FindAllMarkers(object = L5ALM.ITPT, test.use = "MAST", la
 L5ALM.ITPT = SetAllIdent(L5ALM.ITPT, id = 'cluster')
 allmarkers.cluster <- FindAllMarkers(object = L5ALM.ITPT, test.use = "MAST", latent.vars = latentVars, logfc.threshold = 0.1,min.pct = 0.05,only.pos = T)
 
-save(Tasic2018, L5ALM.ITPT, allmarkers.subclass,allmarkers.cluster, file="~/data/Tasic2018-reAnalysis.RData")
 
+top100 <- allmarkers.cluster %>% filter(p_val_adj < 0.01) %>% group_by(cluster) %>% top_n(100, avg_logFC)
+L5ALM.ITPT = SetAllIdent(L5ALM.ITPT, id = 'cluster')
+DoHeatmap(object = L5ALM.ITPT, genes.use = top100$gene, slim.col.label = TRUE, remove.key = TRUE,group.label.loc="top",group.label.rot=T)
+
+
+#DE between IT and rest of the Gad1 neurons within Tasic2018
+class_of_interest <- c("Glutamatergic")
+cells <- rownames(Tasic2018@meta.data[which(Tasic2018@meta.data$class %in% class_of_interest),])
+Glutamatergics <- SubsetData(object = Tasic2018, cells.use = cells,do.center = T,do.scale = T,do.clean = T)
+Glutamatergics <- QuickSeurat(Glutamatergics, vars2reg = latentVars)
+TSNEPlot(Glutamatergics, group.by="brain_subregion")
+TSNEPlot(Glutamatergics, group.by="subclass")
+TSNEPlot(Glutamatergics, group.by="class")
+TSNEPlot(Glutamatergics, group.by="cluster", do.label = T)
+TSNEPlot(Glutamatergics, group.by="res.1", do.label = T)
+
+#DE of L5 IT or L5 PT against all other subclasses:
+Glutamatergics = SetAllIdent(Glutamatergics, id = 'subclass')
+allmarkers.glu.subclass <- FindAllMarkers(object = Glutamatergics, test.use = "MAST", latent.vars = latentVars, logfc.threshold = 0.1,min.pct = 0.05,only.pos = T)
+
+
+save(Tasic2018,
+     L5ALM.ITPT,
+     Glutamatergics,
+     allmarkers.subclass,
+     allmarkers.cluster,
+     allmarkers.glu.subclass,
+     file="~/data/Tasic2018-reAnalysis.RData")
