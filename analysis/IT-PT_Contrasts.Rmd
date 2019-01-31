@@ -1,0 +1,53 @@
+---
+title: "IT-PT_Constrasts"
+author: "Yasin Kaymaz"
+date: "1/31/2019"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(plotly)
+library(DT)
+library(tidyverse)
+options(width = 80)
+source("https://raw.githubusercontent.com/yasinkaymaz/cellRtools/master/main/functions.R")
+load("data/Tasic2018-reAnalysis.RData")
+```
+
+# Differential Expression between IT/PT subclasses and all other Gad1+ cells
+
+## Contrast against Glutamatergic neurons
+
+This t-sne plot include only cells that are glutamatergic neurons. Given that L5 IT and PT cells are also glutamatergic, I constrast their gene expressions against all other glutamatergic cells first.
+
+```{r echo=FALSE}
+TSNEPlot(Glutamatergics, group.by="subclass")
+```
+
+
+
+### Table for **genes with significantly higher expression in IT in contrast to rest of the Glutamatergic neurons**:
+
+```{r, echo=FALSE, message=FALSE, warning=FALSE}
+allmarkers.glu.subclass  %>% select(-p_val)%>% filter(cluster == "L5 IT") %>% filter(p_val_adj < 0.01) %>%
+  datatable( extensions = 'Scroller', options = list(
+    deferRender = TRUE,
+    scrollY = 200,
+    scroller = TRUE
+  ))
+```
+
+
+### Table for **genes with significantly higher expression in PT in contrast to rest of the Glutamatergic neurons**:
+
+```{r, echo=FALSE, message=FALSE, warning=FALSE}
+allmarkers.glu.subclass %>% select(-p_val)%>% filter(cluster == "L5 PT") %>% filter(p_val_adj < 0.01) %>%
+  datatable( extensions = 'Scroller', options = list(
+    deferRender = TRUE,
+    scrollY = 200,
+    scroller = TRUE
+  ))
+```
+
+
