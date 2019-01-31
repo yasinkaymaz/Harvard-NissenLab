@@ -35,8 +35,14 @@ ggplotly(p)
 
 ### Table for genes with significantly higher expression in **IT**:
 
+(padj < 0.01, avglogFC > 0.5)
+
 ```{r, echo=FALSE, message=FALSE, warning=FALSE}
-allmarkers.subclass  %>% select(-p_val)%>% filter(cluster == "L5 IT") %>% filter(p_val_adj < 0.01) %>%
+allmarkers.subclass  %>% 
+  select(-p_val)%>% 
+  filter(cluster == "L5 IT") %>% 
+  filter(p_val_adj < 0.01) %>%
+  filter(avg_logFC > 0.5) %>%
   datatable( extensions = 'Scroller', options = list(
     deferRender = TRUE,
     scrollY = 200,
@@ -47,8 +53,14 @@ allmarkers.subclass  %>% select(-p_val)%>% filter(cluster == "L5 IT") %>% filter
 
 ### Table for genes with significantly higher expression in **PT**:
 
+(padj < 0.01, avglogFC > 0.5)
+
 ```{r, echo=FALSE, message=FALSE, warning=FALSE}
-allmarkers.subclass  %>% select(-p_val)%>% filter(cluster == "L5 PT") %>% filter(p_val_adj < 0.01) %>%
+allmarkers.subclass  %>% 
+  select(-p_val) %>% 
+  filter(cluster == "L5 PT") %>% 
+  filter(p_val_adj < 0.01) %>%
+  filter(avg_logFC > 0.5) %>%
   datatable( extensions = 'Scroller', options = list(
     deferRender = TRUE,
     scrollY = 200,

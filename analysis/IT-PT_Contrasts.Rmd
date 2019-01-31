@@ -29,8 +29,14 @@ TSNEPlot(Glutamatergics, group.by="subclass")
 
 ### Table for **genes with significantly higher expression in IT in contrast to rest of the Glutamatergic neurons**:
 
+(padj < 0.01, avglogFC > 0.5)
+
 ```{r, echo=FALSE, message=FALSE, warning=FALSE}
-allmarkers.glu.subclass  %>% select(-p_val)%>% filter(cluster == "L5 IT") %>% filter(p_val_adj < 0.01) %>%
+allmarkers.glu.subclass  %>% 
+  select(-p_val)%>% 
+  filter(cluster == "L5 IT") %>% 
+  filter(p_val_adj < 0.01) %>%
+  filter(avg_logFC > 0.5) %>%
   datatable( extensions = 'Scroller', options = list(
     deferRender = TRUE,
     scrollY = 200,
@@ -41,8 +47,14 @@ allmarkers.glu.subclass  %>% select(-p_val)%>% filter(cluster == "L5 IT") %>% fi
 
 ### Table for **genes with significantly higher expression in PT in contrast to rest of the Glutamatergic neurons**:
 
+(padj < 0.01, avglogFC > 0.5)
+
 ```{r, echo=FALSE, message=FALSE, warning=FALSE}
-allmarkers.glu.subclass %>% select(-p_val)%>% filter(cluster == "L5 PT") %>% filter(p_val_adj < 0.01) %>%
+allmarkers.glu.subclass %>% 
+  select(-p_val)%>% 
+  filter(cluster == "L5 PT") %>% 
+  filter(p_val_adj < 0.01) %>%
+  filter(avg_logFC > 0.5) %>%
   datatable( extensions = 'Scroller', options = list(
     deferRender = TRUE,
     scrollY = 200,
@@ -50,4 +62,20 @@ allmarkers.glu.subclass %>% select(-p_val)%>% filter(cluster == "L5 PT") %>% fil
   ))
 ```
 
+
+
+
+
+
+.
+
+.
+
+.
+
+.
+
+.
+
+.
 
