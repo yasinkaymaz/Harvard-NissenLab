@@ -1,3 +1,4 @@
+.libPaths("/n/home13/yasinkaymaz/biotools/Rlibs/")
 
 source("https://raw.githubusercontent.com/yasinkaymaz/cellRtools/master/main/functions.R")
 
