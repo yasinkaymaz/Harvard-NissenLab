@@ -34,3 +34,12 @@ load("~/data/Genes.to.filter.Rdata")
 exp <- exp[which(!rownames(exp) %in% genesTofilter),]
 
 Tasic2018 <- SeuratWrapper(ExpData = exp, ProjectLabel = "Tasic2018", Normalize = T, NewMeta = meta, scale.only.var = T, PCs = 50, dump.files = F, min.cells = 4, min.genes = 500)
+
+
+#Tasic2016
+#cd ~/Documents/Harvard_Informatics/Data_Explore/mouse/FullSets/GEO/Tasic2016/
+#wget https://www.ncbi.nlm.nih.gov/geo/download/?acc=GSE71585&format=file&file=GSE71585%5FClustering%5FResults%2Ecsv%2Egz
+#wget https://www.ncbi.nlm.nih.gov/geo/download/?acc=GSE71585&format=file&file=GSE71585%5FRefSeq%5FTPM%2Ecsv%2Egz
+exp <- read.csv("GSE71585_RefSeq_TPM.csv",row.names = 1,header = T)
+meta <- read.csv("GSE71585_Clustering_Results.csv.gz", header=TRUE,row.names=1)
+Tasic2016 <- SeuratWrapper(ExpData = exp, ProjectLabel = "Tasic2016", Normalize = F, scale.only.var = T, PCs = 20, dump.files = T, NewMeta = meta)
