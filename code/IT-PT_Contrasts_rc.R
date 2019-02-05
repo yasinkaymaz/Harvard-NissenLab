@@ -12,7 +12,8 @@ latentVars <- c("nUMI","nGene","percent_ecoli_reads","percent_synth_reads","perc
 class_of_interest <- c("Glutamatergic")
 cells <- rownames(Tasic2018@meta.data[which(Tasic2018@meta.data$class %in% class_of_interest),])
 Glutamatergics <- SubsetData(object = Tasic2018, cells.use = cells,do.center = T,do.scale = T,do.clean = T)
-Glutamatergics <- QuickSeurat(Glutamatergics, vars2reg = latentVars, scale.only.var = F)
+#Glutamatergics <- QuickSeurat(Glutamatergics, vars2reg = latentVars, scale.only.var = F)
+Glutamatergics <- QuickSeurat(Glutamatergics, scale.only.var = F)
 #DE of L5 IT or L5 PT against all other subclasses:
 Glutamatergics = SetAllIdent(Glutamatergics, id = 'subclass')
 #allmarkers.glu.subclass <- FindAllMarkers(object = Glutamatergics, test.use = "MAST", latent.vars = latentVars, logfc.threshold = 0.1,min.pct = 0.05,only.pos = T)
