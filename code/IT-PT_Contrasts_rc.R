@@ -7,6 +7,8 @@ load("~/data/Tasic2018.seurat.Robj")
 Tasic2018 <- SeuratObj
 rm(SeuratObj)
 
+latentVars <- c("nUMI","nGene","percent_ecoli_reads","percent_synth_reads","percent_mt_exon_reads",
+                "percent_rrna_reads")
 class_of_interest <- c("Glutamatergic")
 cells <- rownames(Tasic2018@meta.data[which(Tasic2018@meta.data$class %in% class_of_interest),])
 Glutamatergics <- SubsetData(object = Tasic2018, cells.use = cells,do.center = T,do.scale = T,do.clean = T)
