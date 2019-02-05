@@ -37,7 +37,6 @@ allmarkers.glu.subclass  %>%
   filter(cluster == "L5 IT") %>% 
   filter(p_val_adj < 0.01) %>%
   filter(avg_logFC > 0.2) %>%
-  filter(pct.1 > 0.5) %>% filter( ((pct.1 - pct.2)/max(pct.1,pct.2) > 0.7)) %>%
   datatable( extensions = 'Scroller', options = list(
     deferRender = TRUE,
     scrollY = 200,
@@ -56,7 +55,6 @@ allmarkers.glu.subclass %>%
   filter(cluster == "L5 PT") %>% 
   filter(p_val_adj < 0.01) %>%
   filter(avg_logFC > 0.2) %>%
-  filter(pct.1 > 0.5) %>% filter( ((pct.1 - pct.2)/max(pct.1,pct.2) > 0.7)) %>%
   datatable( extensions = 'Scroller', options = list(
     deferRender = TRUE,
     scrollY = 200,
