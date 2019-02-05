@@ -12,20 +12,48 @@ library(DT)
 options(width = 80)
 source("https://raw.githubusercontent.com/yasinkaymaz/cellRtools/master/main/functions.R")
 ```
+# Main Steps
 
+## Tasic 2018 dataset
 
-# Tasic 2018 dataset
-## Optain the ALM dataset from Allen Inst.
+### 1. Obtain the data
 
 ```{bash}
+#ALM data:
 #wget http://celltypes.brain-map.org/api/v2/well_known_file_download/694413179
 #unzip mouse_ALM_gene_expression_matrices_2018-06-14.zip
+
+#VISp data:
+#wget http://celltypes.brain-map.org/api/v2/well_known_file_download/694413985
+#unzip mouse_VISp_gene_expression_matrices_2018-06-14.zip
 ```
 
 After downloading the data, unzip the file and use the exon based gene **count** matrix for further analysis.
 
-# Tasic2016 dataset
-## Optain the dataset from NCBI GEO
+### 2. Filter out non-relevant genes prior to analysis. I took the filtration criteria from methods of Tasic et al., 2018.
+
+Filter out
+
+  - Predicted gene models (gene names that start with Gm).
+  - Genes from mitochondrial chromosome.
+  - Ribosomal genes
+  - Sex-specific genes (Here is how I determined the gender-specific genes: [Code](https://github.com/yasinkaymaz/Harvard-NissenLab/tree/master/code/Determine_genes_to_filter.R))
+  - Genes detected in less than 4 cells (min.cells = 4, Seurat)
+
+### 3. I also filtered cells based on their expressed gene quantity.
+
+  - Filter out cells expressing less than 500 genes (min.genes = 500, Seurat)
+
+
+
+
+
+
+
+
+## Tasic2016 dataset
+
+### 1. Obtain the data
 
 ```{bash}
 #wget https://www.ncbi.nlm.nih.gov/geo/download/?acc=GSE71585&format=file&file=GSE71585%5FClustering%5FResults%2Ecsv%2Egz
@@ -33,7 +61,8 @@ After downloading the data, unzip the file and use the exon based gene **count**
 ```
 
 
-For the processing details, please follow [code/WP_codes.R](https://github.com/yasinkaymaz/Harvard-NissenLab/tree/master/code/WP_codes.R)
+For the processing details, please follow [Code](https://github.com/yasinkaymaz/Harvard-NissenLab/tree/master/code/WP_codes.R)
+
 
 .
 

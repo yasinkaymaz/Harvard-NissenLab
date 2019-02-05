@@ -12,7 +12,7 @@ library(DT)
 library(tidyverse)
 options(width = 80)
 source("https://raw.githubusercontent.com/yasinkaymaz/cellRtools/master/main/functions.R")
-load("data/Tasic2018-reAnalysis.RData")
+load("~/data/Tasic2018-reAnalysis_Glutamatergics.RData")
 ```
 
 # Differential Expression between IT/PT subclasses and all other Gad1+ cells
@@ -29,14 +29,15 @@ TSNEPlot(Glutamatergics, group.by="subclass")
 
 ### Table for **genes with significantly higher expression in IT in contrast to rest of the Glutamatergic neurons**:
 
-(padj < 0.01, avglogFC > 0.5)
+(padj < 0.01, avglogFC > 0.2)
 
 ```{r, echo=FALSE, message=FALSE, warning=FALSE}
 allmarkers.glu.subclass  %>% 
   select(-p_val)%>% 
   filter(cluster == "L5 IT") %>% 
   filter(p_val_adj < 0.01) %>%
-  filter(avg_logFC > 0.5) %>%
+  filter(avg_logFC > 0.2) %>%
+  filter(pct.1 > 0.5) %>% filter( ((pct.1 - pct.2)/max(pct.1,pct.2) > 0.7)) %>%
   datatable( extensions = 'Scroller', options = list(
     deferRender = TRUE,
     scrollY = 200,
@@ -47,14 +48,15 @@ allmarkers.glu.subclass  %>%
 
 ### Table for **genes with significantly higher expression in PT in contrast to rest of the Glutamatergic neurons**:
 
-(padj < 0.01, avglogFC > 0.5)
+(padj < 0.01, avglogFC > 0.2)
 
 ```{r, echo=FALSE, message=FALSE, warning=FALSE}
 allmarkers.glu.subclass %>% 
   select(-p_val)%>% 
   filter(cluster == "L5 PT") %>% 
   filter(p_val_adj < 0.01) %>%
-  filter(avg_logFC > 0.5) %>%
+  filter(avg_logFC > 0.2) %>%
+  filter(pct.1 > 0.5) %>% filter( ((pct.1 - pct.2)/max(pct.1,pct.2) > 0.7)) %>%
   datatable( extensions = 'Scroller', options = list(
     deferRender = TRUE,
     scrollY = 200,
