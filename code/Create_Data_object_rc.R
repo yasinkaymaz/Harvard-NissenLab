@@ -40,6 +40,19 @@ Tasic2018 <- SeuratWrapper(ExpData = exp, ProjectLabel = "Tasic2018", Normalize 
 #cd ~/Documents/Harvard_Informatics/Data_Explore/mouse/FullSets/GEO/Tasic2016/
 #wget https://www.ncbi.nlm.nih.gov/geo/download/?acc=GSE71585&format=file&file=GSE71585%5FClustering%5FResults%2Ecsv%2Egz
 #wget https://www.ncbi.nlm.nih.gov/geo/download/?acc=GSE71585&format=file&file=GSE71585%5FRefSeq%5FTPM%2Ecsv%2Egz
-exp <- read.csv("GSE71585_RefSeq_TPM.csv",row.names = 1,header = T)
-meta <- read.csv("GSE71585_Clustering_Results.csv.gz", header=TRUE,row.names=1)
-Tasic2016 <- SeuratWrapper(ExpData = exp, ProjectLabel = "Tasic2016", Normalize = F, scale.only.var = T, PCs = 20, dump.files = T, NewMeta = meta)
+exp <- read.csv("~/data/GSE71585_RefSeq_counts.csv",row.names = 1,header = T)
+meta <- read.csv("~/data/GSE71585_Clustering_Results.csv.gz", header=TRUE,row.names=1)
+Tasic2016 <- SeuratWrapper(ExpData = exp, ProjectLabel = "Tasic2016", Normalize = T, scale.only.var = T, PCs = 20, dump.files = T, NewMeta = meta)
+
+
+g.1 <- head(rownames(Tasic2016@hvg.info), 1000)
+g.2 <- head(rownames(Tasic2018@hvg.info), 1000)
+
+genes.use <- unique(c(g.1, g.2))
+genes.use <- intersect(genes.use, rownames(Tasic2016@scale.data))
+genes.use <- intersect(genes.use, rownames(Tasic2018@scale.data))
+
+multiCCA_list <- list(Tasic2016 , Tasic2018 )
+Tasic.combined <- RunCCA(object = Tasic2018, object2 = Tasic2016,genes.use = genes.use, num.cc = 4)
+
+save(Tasic.combined, file="~/data/Tasic.combined.seurat.Robj")
