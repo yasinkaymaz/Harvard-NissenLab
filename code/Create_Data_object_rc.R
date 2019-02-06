@@ -33,7 +33,7 @@ load("~/data/Genes.to.filter.Rdata")
 
 exp <- exp[which(!rownames(exp) %in% genesTofilter),]
 
-Tasic2018 <- SeuratWrapper(ExpData = exp, ProjectLabel = "Tasic2018", Normalize = T, NewMeta = meta, scale.only.var = T, PCs = 50, dump.files = F, min.cells = 4, min.genes = 500)
+Tasic2018 <- SeuratWrapper(ExpData = exp, ProjectLabel = "Tasic2018", Normalize = T, NewMeta = meta, scale.only.var = F, PCs = 50, dump.files = F, min.cells = 4, min.genes = 500)
 
 
 #Tasic2016

@@ -42,19 +42,9 @@ rm(L5ALM.ITPT, allmarkers.subclass, allmarkers.cluster)
 
 save(Tasic2018,
      L5ALM.ITPT,
-     Glutamatergics,
      allmarkers.subclass,
      allmarkers.cluster,
-     allmarkers.glu.subclass,
      file="~/data/Tasic2018-reAnalysis.RData")
-
-
-load("~/data/Tasic2018-reAnalysis.RData")
-
-top100 <- allmarkers.cluster %>% filter(p_val_adj < 0.01)  %>% filter( ((pct.1 - pct.2)/max(pct.1,pct.2) > 0.7)) %>% group_by(cluster)
-L5ALM.ITPT = SetAllIdent(L5ALM.ITPT, id = 'cluster')
-DoHeatmap(object = L5ALM.ITPT,use.scaled = T, genes.use = top100$gene, slim.col.label = TRUE, remove.key = TRUE, group.label.loc="top", group.label.rot=T)
-
 
 
 DElimma <- function(SeuratObj ){
@@ -81,3 +71,28 @@ DElimma <- function(SeuratObj ){
 
 detable <- DElimma(L5ALM.ITPT)
 DoHeatmap(object = L5ALM.ITPT, use.scaled = T, genes.use = rownames(detable), slim.col.label = TRUE, remove.key = TRUE, group.label.loc="top", group.label.rot=T)
+
+load("~/data/Tasic2018-reAnalysis_L5ITPT.RData")
+
+pdf("output/test.pdf",width = 20,height = 90)
+VlnPlot(object = Tasic2018, features.plot = c("Nrgn","Slc17a7","Rgs4","Arpp19","Ptn","Arpp21"), use.raw = TRUE, y.log = TRUE,nCol = 1,x.lab.rot = T)
+dev.off()
+
+pdf("output/test2.pdf",width = 20,height = 90)
+VlnPlot(object = Tasic2018, features.plot = c("S100a10", "Fam3c", "Deptor", "Cnih3", "Rgs4", "Vstm2l"), use.raw = TRUE, y.log = TRUE,nCol = 1,x.lab.rot = T)
+dev.off()
+
+marker.it <- markers.L5IT.vs.Gaba_Glu %>%
+  add_column(gene=row.names(markers.L5IT.vs.Gaba_Glu)) %>%
+  select(-p_val)%>%
+  filter(p_val_adj < 0.01) %>%
+  filter(pct.1 > 0.5) %>% filter( ((pct.1 - pct.2)/max(pct.1,pct.2) > 0.5))
+
+
+pdf("output/test3.pdf",width = 20,height = 90)
+VlnPlot(object = Tasic2018, features.plot = c("Crym","S100a10","Hs3st2","Adcyap1"), use.raw = TRUE, y.log = TRUE,nCol = 1,x.lab.rot = T)
+dev.off()
+
+
+save(Tasic2018, file="~/data/Tasic2018.seurat.Robj")
+save(Tasic2016, file="~/data/Tasic2016.seurat.Robj")

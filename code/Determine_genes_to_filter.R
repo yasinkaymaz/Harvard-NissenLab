@@ -44,6 +44,9 @@ sex.genes <- genderSpecificDE$gene
 r.genes <- droplevels(geneinfo[grep("ribosomal",x=geneinfo$gene_name,value = F),]$gene_symbol)
 
 # filter genes before creating the seurat object. Rerun the analysis from the begining.
-genesTofilter <- c(gm.genes, mt.genes, sex.genes, r.genes)
-save(genesTofilter, file="~/data/Genes.to.filter.Rdata")
+#genesTofilter <- c(gm.genes, mt.genes, sex.genes, r.genes)
+#save(genesTofilter, file="~/data/Genes.to.filter.Rdata")
 
+# Temporarily excluded sex genes from the filter list.
+genesTofilter <- c(gm.genes, mt.genes, r.genes)
+save(genesTofilter, file="~/data/Genes.to.filter.Rdata")
