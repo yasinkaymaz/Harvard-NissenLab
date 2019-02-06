@@ -1,8 +1,10 @@
 ---
-title: "IT-PT_Constrasts"
+title: "IT-PT_Contrasts"
 author: "Yasin Kaymaz"
 date: "1/31/2019"
-output: html_document
+output:
+  html_document:
+    css: style.css
 ---
 
 ```{r setup, include=FALSE}
@@ -10,54 +12,67 @@ knitr::opts_chunk$set(echo = TRUE)
 library(plotly)
 library(DT)
 library(tidyverse)
-options(width = 80)
 source("https://raw.githubusercontent.com/yasinkaymaz/cellRtools/master/main/functions.R")
+source("code/functions.R")
+
 load("~/data/markers.L5IT.vs.Gaba.Rdata")
 load("~/data/markers.L5IT.vs.Glu.Rdata")
 load("~/data/markers.L5IT.vs.Gaba_Glu.Rdata")
-
-FilterTable <- function(DEtable){
-  FilteredDETable <- DEtable %>%
-    add_column(gene=rownames(DEtable)) %>%
-    select(-p_val)%>%
-    filter(p_val_adj < 0.01) %>%
-    filter(avg_logFC > 0.2) %>%
-    filter(pct.1 > 0.5) %>% filter( ((pct.1 - pct.2) > 0.25))
-
-  return(FilteredDETable)
-}
-
-InteractiveTable <- function(DEtable){
-  library(DT)
-  DEtable %>% 
-    datatable( extensions = 'Scroller', options = list(
-      deferRender = TRUE,
-      scrollY = 200,
-      scroller = TRUE
-    ))
-}
+load("~/data/markers.L5PT.vs.Gaba.Rdata")
+load("~/data/markers.L5PT.vs.Glu.Rdata")
+load("~/data/markers.L5PT.vs.Gaba_Glu.Rdata")
 
 ```
 
-# IT cells - Contrast against Glutamatergic neurons
+# L5 IT cell contrasts:
+
+## IT cells - Contrast against Glutamatergic neurons
 
 ```{r echo=FALSE}
+#InteractiveTable(FilterTable(annotateGenes(markers.L5IT.vs.Glu)))
 InteractiveTable(FilterTable(markers.L5IT.vs.Glu))
-
 ```
 
 
-# IT cells - Contrast against GABAergic neurons
+## IT cells - Contrast against GABAergic neurons
 
 ```{r echo=FALSE}
+#InteractiveTable(FilterTable(annotateGenes(markers.L5IT.vs.Gaba)))
 InteractiveTable(FilterTable(markers.L5IT.vs.Gaba))
 ```
 
-# IT cells - Contrast against both Glutamatergic and GABAergic neurons
+## IT cells - Contrast against both Glutamatergic and GABAergic neurons
 
 ```{r echo=FALSE}
+#InteractiveTable(FilterTable(annotateGenes(markers.L5IT.vs.Gaba_Glu)))
 InteractiveTable(FilterTable(markers.L5IT.vs.Gaba_Glu))
 ```
+
+
+# L5 PT cell contrasts:
+
+## PT cells - Contrast against Glutamatergic neurons
+
+```{r echo=FALSE}
+#InteractiveTable(FilterTable(annotateGenes(markers.L5PT.vs.Glu)))
+InteractiveTable(FilterTable(markers.L5PT.vs.Glu))
+```
+
+
+## PT cells - Contrast against GABAergic neurons
+
+```{r echo=FALSE}
+#InteractiveTable(FilterTable(annotateGenes(markers.L5PT.vs.Gaba)))
+InteractiveTable(FilterTable(markers.L5PT.vs.Gaba))
+```
+
+## PT cells - Contrast against both Glutamatergic and GABAergic neurons
+
+```{r echo=FALSE}
+#InteractiveTable(FilterTable(annotateGenes(markers.L5PT.vs.Gaba_Glu)))
+InteractiveTable(FilterTable(markers.L5PT.vs.Gaba_Glu))
+```
+
 
 
 .

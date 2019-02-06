@@ -2,7 +2,9 @@
 title: "DE_L5_IT-PT"
 author: "Yasin Kaymaz"
 date: "1/30/2019"
-output: html_document
+output:
+  html_document:
+    css: style.css
 ---
 
 ```{r setup, include=FALSE}
