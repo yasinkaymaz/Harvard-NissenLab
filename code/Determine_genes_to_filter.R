@@ -1,9 +1,11 @@
+.libPaths("/n/home13/yasinkaymaz/biotools/Rlibs/")
+
 #Determine gender specific genes within L5 IT/PT cells
 source("https://raw.githubusercontent.com/yasinkaymaz/cellRtools/master/main/functions.R")
 
 load("~/data/Tasic2018.seurat.Robj")
-Tasic2018 <- SeuratObj
-rm(SeuratObj)
+#Tasic2018 <- SeuratObj
+#rm(SeuratObj)
 
 #"L5 IT ALM Npw" --> was left out
 clusters_of_interest <- c("L5 IT ALM Cbln4 Fezf2",
