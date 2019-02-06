@@ -89,10 +89,25 @@ marker.it <- markers.L5IT.vs.Gaba_Glu %>%
   filter(pct.1 > 0.5) %>% filter( ((pct.1 - pct.2)/max(pct.1,pct.2) > 0.5))
 
 
-pdf("output/test3.pdf",width = 20,height = 90)
-VlnPlot(object = Tasic2018, features.plot = c("Crym","S100a10","Hs3st2","Adcyap1"), use.raw = TRUE, y.log = TRUE,nCol = 1,x.lab.rot = T)
-dev.off()
+
 
 
 save(Tasic2018, file="~/data/Tasic2018.seurat.Robj")
 save(Tasic2016, file="~/data/Tasic2016.seurat.Robj")
+
+
+
+InteractiveTable(FilterTable(markers.L5IT.vs.Gaba_Glu))
+VlnPlot(object = Tasic2018, features.plot = head(FilterTable(markers.L5IT.vs.Gaba_Glu)$gene), use.raw = TRUE, y.log = TRUE,nCol = 1,x.lab.rot = T)
+
+
+
+
+Genes=FilterTable(markers.L5IT.vs.Gaba_Glu)$gene
+n_genes = length(Genes)
+output = "output/Tasic2018-markers.L5IT.vs.Glu.pdf"
+SeuratObj = Tasic2018
+pdf(output,width = 20,height = n_genes*5)
+VlnPlot(object = SeuratObj, features.plot = Genes, use.raw = TRUE, y.log = TRUE,nCol = 1,x.lab.rot = T)
+dev.off()
+
