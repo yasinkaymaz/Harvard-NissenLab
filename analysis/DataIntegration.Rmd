@@ -12,6 +12,14 @@ library(DT)
 options(width = 80)
 source("https://raw.githubusercontent.com/yasinkaymaz/cellRtools/master/main/functions.R")
 ```
+
+# Summary
+
+Single cell data from Tasic et al. 2018 is from two separate regions of mouse brain, Anterior Lateral Motor cortex (ALM) and Primary Visual cortex (VISp). Total single cells sequenced are 10,068 and 15,413, respectively.
+
+The single cell data from Tasic et al. 2016 is total of 1,809 cells from Primary Visual cortex (VISp) of mouse brain.
+
+
 # Main Steps
 
 ## Tasic 2018 dataset

@@ -12,59 +12,52 @@ library(DT)
 library(tidyverse)
 options(width = 80)
 source("https://raw.githubusercontent.com/yasinkaymaz/cellRtools/master/main/functions.R")
-load("~/data/Tasic2018-reAnalysis_Glutamatergics.RData")
+load("~/data/markers.L5IT.vs.Gaba.Rdata")
+load("~/data/markers.L5IT.vs.Glu.Rdata")
+load("~/data/markers.L5IT.vs.Gaba_Glu.Rdata")
+
+FilterTable <- function(DEtable){
+  FilteredDETable <- DEtable %>%
+    add_column(gene=rownames(DEtable)) %>%
+    select(-p_val)%>%
+    filter(p_val_adj < 0.01) %>%
+    filter(avg_logFC > 0.2) %>%
+    filter(pct.1 > 0.5) %>% filter( ((pct.1 - pct.2) > 0.25))
+
+  return(FilteredDETable)
+}
+
+InteractiveTable <- function(DEtable){
+  library(DT)
+  DEtable %>% 
+    datatable( extensions = 'Scroller', options = list(
+      deferRender = TRUE,
+      scrollY = 200,
+      scroller = TRUE
+    ))
+}
+
 ```
 
-# Differential Expression between IT/PT subclasses and all other Gad1+ cells
-
-## Contrast against Glutamatergic neurons
-
-This t-sne plot include only cells that are glutamatergic neurons. Given that L5 IT and PT cells are also glutamatergic, I constrast their gene expressions against all other glutamatergic cells first.
+# IT cells - Contrast against Glutamatergic neurons
 
 ```{r echo=FALSE}
-TSNEPlot(Glutamatergics, group.by="subclass")
+InteractiveTable(FilterTable(markers.L5IT.vs.Glu))
+
 ```
 
 
+# IT cells - Contrast against GABAergic neurons
 
-### Table for **genes with significantly higher expression in IT in contrast to rest of the Glutamatergic neurons**:
-
-(padj < 0.01, avglogFC > 0.2)
-
-```{r, echo=FALSE, message=FALSE, warning=FALSE}
-allmarkers.glu.subclass  %>% 
-  select(-p_val)%>% 
-  filter(cluster == "L5 IT") %>% 
-  filter(p_val_adj < 0.01) %>%
-  filter(avg_logFC > 0.2) %>%
-  datatable( extensions = 'Scroller', options = list(
-    deferRender = TRUE,
-    scrollY = 200,
-    scroller = TRUE
-  ))
+```{r echo=FALSE}
+InteractiveTable(FilterTable(markers.L5IT.vs.Gaba))
 ```
 
+# IT cells - Contrast against both Glutamatergic and GABAergic neurons
 
-### Table for **genes with significantly higher expression in PT in contrast to rest of the Glutamatergic neurons**:
-
-(padj < 0.01, avglogFC > 0.2)
-
-```{r, echo=FALSE, message=FALSE, warning=FALSE}
-allmarkers.glu.subclass %>% 
-  select(-p_val)%>% 
-  filter(cluster == "L5 PT") %>% 
-  filter(p_val_adj < 0.01) %>%
-  filter(avg_logFC > 0.2) %>%
-  datatable( extensions = 'Scroller', options = list(
-    deferRender = TRUE,
-    scrollY = 200,
-    scroller = TRUE
-  ))
+```{r echo=FALSE}
+InteractiveTable(FilterTable(markers.L5IT.vs.Gaba_Glu))
 ```
-
-
-
-
 
 
 .

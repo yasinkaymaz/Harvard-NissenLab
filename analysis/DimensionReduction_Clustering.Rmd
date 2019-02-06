@@ -18,8 +18,7 @@ source("https://raw.githubusercontent.com/yasinkaymaz/cellRtools/master/main/fun
 
 ```{r echo=FALSE}
 load("~/data/Tasic2018.seurat.Robj")
-Tasic2018 <- SeuratObj
-rm(SeuratObj)
+
 load("~/data/Tasic2018-reAnalysis_L5ITPT.RData")
 ```
 
